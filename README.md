@@ -8,3 +8,10 @@ We demonstrate how to
 3. Organize and build a complex ML model
 4. Run an ML model and evaluate results. 
 
+
+
+## TO-DO
+* Bayesian Optimization
+* Increase complexity of feature space
+* Get more detailed data
+
