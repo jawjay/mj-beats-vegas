@@ -9,6 +9,11 @@ We demonstrate how to
 4. Run an ML model and evaluate results. 
 
 
+## File Organization
+* **BoxScores** Files for scraping boxscores/betting info from the web
+* **Scripts** Scripts for cleaning/organizing data
+* **Predictor** ML model organization and implementation
+
 
 ## TO-DO
 * Bayesian Optimization
