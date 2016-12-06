@@ -8,6 +8,11 @@ from constant import SEASON_1516_SPLIT,SEASON_1516_END
 WIN_MONEY = 100
 LOSS_MONEY = 110
 def get_historical_games_by_tuple(historical_games):
+  '''
+  organize historical games with tuple
+  tuple: data,home,away = total_score 
+  
+  '''
   historical_games_by_tuple = {}
   for game in historical_games:
     historical_games_by_tuple[tuple((game['date'], game['home'], game['away']))] = game['total_score']
@@ -48,7 +53,7 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
         loss += 1
 
 
-        
+
     winnings = win*WIN_MONEY - loss*LOSS_MONEY
     winnings_list.append(winnings)
 

@@ -10,7 +10,6 @@ import bet_reader
 import model
 
 def get_historical_games(box_scores,max_date=None):
-    all_stats = read_data.generate_all_stats(box_scores)
     historical_games = read_data.generate_historical_games(box_scores,max_date=max_date)
     return historical_games
 
@@ -21,7 +20,7 @@ def run_beatVegas(box_scores,historical_games,historical_games_training_set, bet
     historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
     
     all_stats = read_data.generate_all_stats(box_scores)
-    moving_averages = [5,15]
+    moving_averages = [2,5,10,20]
     X,y = model.build_model_inputs(historical_games_training_set,all_stats,moving_averages)
     
     the_model = model.build_model(X,y)
@@ -34,14 +33,15 @@ bpath = '/Users/MarkJaj/Documents/github/bbrefpy/Scripts/Cleaning/betting_2015_c
 boxpath = '/Users/MarkJaj/Documents/github/bbrefpy/Scripts/Cleaning/results_2015.pkl'
 
 def run_example(boxscorepath,max_date = SEASON_1516_SPLIT) :
-    box_scores = read_data.pickle2box_scores(boxscorepath)
+    box_scores = read_data.pickle2box_scores(boxscorepath) # create box scores
     historical_games = get_historical_games(box_scores)
-    historical_games_training_set = get_historical_games(box_scores, max_date=max_date)
+    historical_games_training_set = get_historical_games(box_scores, max_date=max_date) # need a training set
     historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
     bet_info = bet_reader.transform_old_format(bet_reader.readCleanBets(bet_reader.bpath),box_scores)
 
 
     run_beatVegas(box_scores,historical_games,historical_games_training_set,bet_info)
+
 
 run_example(boxpath)

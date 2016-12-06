@@ -12,3 +12,5 @@
 *.pkl
 *.csv
 data/*
+NotUsed/*
+__pycache__/*

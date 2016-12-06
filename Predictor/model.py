@@ -1,10 +1,9 @@
 from sklearn import ensemble
 import numpy
-
 from team_stats import TeamStats
-
-
 from box_score_helpers import get_datetime_from_id
+
+
 def get_features(all_stats, home, away, date, moving_averages, transform_params):
   try:
     features = []
@@ -41,20 +40,7 @@ def build_model_inputs(historical_games, all_stats, moving_averages, transform_p
 
   return numpy.array(X), numpy.array(y)
 
-def build_model(X, y, n_estimators=10, min_samples_split=2, min_samples_leaf=1):
+def build_model(X, y, n_estimators=10, min_samples_split=2, min_samples_leaf=5):
   rf = ensemble.RandomForestRegressor(n_estimators=n_estimators, min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf)
   model = rf.fit(X, y)
   return model
-
-
-'''
-   runner(
-          historical_games_training_set,
-          historical_games_by_tuple,
-          bet_info,
-          all_stats,
-          tunable_param_lists,
-          )
-'''
-
-#X, y = model.build_model_inputs(historical_games_trunc, all_stats, moving_averages, transform_params)

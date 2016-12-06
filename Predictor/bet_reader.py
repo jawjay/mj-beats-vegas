@@ -5,11 +5,18 @@ from box_score_helpers import get_datetime_from_id
 from read_data import pickle2box_scores
 
 def readCleanBets(filepath):
+    '''
+    Get bet data from pickle file
+    Data should be cleaned 
+    '''
     with open(filepath,'rb') as handle:
         bets  = pickle.load(handle)
     return bets
 
 def transform_old_format(old_bet_info,boxscores):
+    '''
+    Convert bets into friendly format
+    '''
     bet_info = []
     for game in old_bet_info:
         day = get_datetime_from_id(game)
