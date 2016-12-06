@@ -1,5 +1,5 @@
 from sklearn import ensemble
-import numpy as np
+import numpy
 
 from team_stats import TeamStats
 
@@ -34,7 +34,7 @@ def build_model_inputs(historical_games, all_stats, moving_averages, transform_p
   y = []
 
   for game in historical_games:
-    features = get_features(all_stats, game['home'], game['away'],get_datetime_from_id(game), moving_averages, transform_params)
+    features = get_features(all_stats, game['home'], game['away'],game['date'], moving_averages, transform_params)
     if features is not None:
       y.append(game['total_score'])
       X.append(numpy.array(features))

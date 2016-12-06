@@ -40,7 +40,4 @@ def generate_all_stats(box_scores,all_stats = None):
 
     return all_stats
     
-boxScores = pickle2box_scores('/Users/MarkJaj/Documents/github/bbrefpy/Scripts/Cleaning/results_2015.pkl')
 
-
-generate_all_stats(boxScores)

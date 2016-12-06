@@ -1,19 +1,19 @@
-import numpy as np
+import numpy 
 from model import get_features
 import datetime
-SEASON_1516_START = datetime.datetime.strptime('2015-10-27', '%Y-%m-%d')
-SEASON_1516_END = datetime.datetime.strptime('2016-04-16', '%Y-%m-%d')
-SEASON_1415_START = datetime.datetime.strptime('2014-10-28', '%Y-%m-%d')
-SEASON_1415_END = datetime.datetime.strptime('2015-04-15', '%Y-%m-%d')
-SEASON_1314_END = datetime.datetime.strptime('2014-04-16', '%Y-%m-%d')
 
+from constant import SEASON_1516_SPLIT,SEASON_1516_END
+
+
+WIN_MONEY = 100
+LOSS_MONEY = 110
 def get_historical_games_by_tuple(historical_games):
   historical_games_by_tuple = {}
   for game in historical_games:
-    historical_games_by_tuple[tuple((game, game['home'], game['away']))] = game['total_score']
+    historical_games_by_tuple[tuple((game['date'], game['home'], game['away']))] = game['total_score']
   return historical_games_by_tuple
 
-def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, moving_averages, transform_params, bet_threshold, cv_percent=0.8, cv_runs=100, start_date=SEASON_1415_START, end_date=SEASON_1415_END):
+def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, moving_averages, transform_params, bet_threshold, cv_percent=0.8, cv_runs=100, start_date=SEASON_1516_SPLIT, end_date=SEASON_1516_END):
   prediction_by_game_tuple = {}
   overunder_by_game_tuple = {}
   for game in bet_info:
@@ -30,11 +30,12 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
   for _ in range(cv_runs):
     win = 0
     loss = 0
-    for game_tuple, prediction in prediction_by_game_tuple.iteritems():
+    for game_tuple in prediction_by_game_tuple:
       if game_tuple not in historical_games_by_tuple:
         continue
+      prediction = prediction_by_game_tuple[game_tuple][0]
       actual_score = historical_games_by_tuple[game_tuple]
-      overunder = overunder_by_game_tuple[game_tuple]
+      overunder = float(overunder_by_game_tuple[game_tuple])
       if numpy.random.uniform(0,1) > cv_percent:
         continue
       if abs(prediction - overunder) < bet_threshold:
@@ -46,6 +47,8 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
       else:
         loss += 1
 
+
+        
     winnings = win*WIN_MONEY - loss*LOSS_MONEY
     winnings_list.append(winnings)
 

@@ -1,5 +1,5 @@
 import datetime
-import numpy as np
+import numpy
 
 import team_features
 from team_features import FeatureSet
@@ -33,7 +33,7 @@ class GameStats(object):
         else:
           raise NotImplementedError("Transform type {0} not implemented.".format(transform_params['type']))
     def get_average_stats_from_last_games(self, num_games, current_date, transform_params):
-        current_date = current_date.date()
+        ''' want to get averages for some num_games'''
         stat_date = current_date - datetime.timedelta(days=1)
         sum_of_stats = numpy.zeros(len(FeatureSet._fields))
         num_games_averaged = 0
