@@ -113,11 +113,10 @@ def seperateByYear(results):
 # getTeamStats(big_file,'testTeam.pkl')
 # with open('box_team_results_cleaned.pkl','rb') as handle:
 #     full_results  = pickle.load(handle)
-with open('results_2015.pkl','rb') as handle:
-    res_2015  = pickle.load(handle)
+# with open('results_2015.pkl','rb') as handle:
+#     res_2015  = pickle.load(handle)
 
-for r in res_2015:
-    print(r,res_2015[r])
+
 # organizeTeam(full_results)
 # seperateByYear(full_results)
 

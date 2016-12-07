@@ -10,7 +10,10 @@ def get_teams(box_score):
     return box_score['home'],box_score['away']
 
 def generate_historical_games(box_scores,max_date = None):
+    ''' function to organize games by date, total score and teams playing
+    '''
     historical_games = []
+
 
     for game in box_scores:
         box_score = box_scores[game]
@@ -29,6 +32,10 @@ def generate_historical_games(box_scores,max_date = None):
             })
     return historical_games
 def generate_all_stats(box_scores,all_stats = None):
+    '''
+    Organize stats with TeamStats class for each team
+    
+    '''
     if not all_stats:
         all_stats = {x:TeamStats(x) for x in teamNames}
     for game in box_scores:

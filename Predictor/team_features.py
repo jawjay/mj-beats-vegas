@@ -33,7 +33,6 @@ FeatureSet = namedtuple(
 
 def calculate_featues_from_boxscore(boxscore,home=False):
     team = 'home' if home else 'away'
-
     basic = boxscore[team+'_basic']
     advanced = boxscore[team+'_advanced']
     stats = basic[1:4]+basic[5:7]+basic[8:10]+basic[11:]+advanced[2:]
