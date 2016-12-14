@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 from box_score_helpers import get_datetime_from_id
 from read_data import pickle2box_scores
-
+from collections import defaultdict
 def readCleanBets(filepath):
     '''
     Get bet data from pickle file
@@ -12,6 +12,8 @@ def readCleanBets(filepath):
     with open(filepath,'rb') as handle:
         bets  = pickle.load(handle)
     return bets
+
+
 
 def transform_old_format(old_bet_info,boxscores):
     '''
@@ -32,7 +34,3 @@ def transform_old_format(old_bet_info,boxscores):
             })
     return bet_info
 
-
-
-bpath = '/Users/MarkJaj/Documents/github/bbrefpy/Scripts/Cleaning/betting_2015_cleaned.pkl'
-boxpath = '/Users/MarkJaj/Documents/github/bbrefpy/Scripts/Cleaning/results_2015.pkl'

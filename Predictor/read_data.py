@@ -14,7 +14,6 @@ def generate_historical_games(box_scores,max_date = None):
     '''
     historical_games = []
 
-
     for game in box_scores:
         box_score = box_scores[game]
         date = get_datetime_from_id(game)
@@ -31,6 +30,8 @@ def generate_historical_games(box_scores,max_date = None):
         'date': date,
             })
     return historical_games
+
+    
 def generate_all_stats(box_scores,all_stats = None):
     '''
     Organize stats with TeamStats class for each team
@@ -44,7 +45,12 @@ def generate_all_stats(box_scores,all_stats = None):
         away = box_score['away'].upper()
         all_stats[home].add_game_to_stats(game,box_score,True)
         all_stats[away].add_game_to_stats(game,box_score,False)
+    for team in all_stats:
+        all_stats[team].stats['home'].orderStats()
+        all_stats[team].stats['away'].orderStats()
+        all_stats[team].stats['total'].orderStats()
 
+        
     return all_stats
     
 

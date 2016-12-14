@@ -1,6 +1,17 @@
 from collections import namedtuple
 
 
+GivenFeatureSetBasic = namedtuple(
+    "GivenFeatureSetBasic",['NAME','MP','FG','FGA','FGP','TP','TPA',
+                    'TPP','FT','FTA','FTP','ORB','DRB','TRB',
+                    'AST','STL','BLK','TOV','PF','PTS']
+    )
+
+GivenFeatureSetAdvanced = namedtuple(
+    "GivenFeatureSetAdvanced",['NAME','MP','TSP','eFGP','TPAr',
+                            'FTr','ORBP','DRBP','TRBP','ASTP','STLP',
+                            'BLKP','TOVP','USGP','ORtg','DRtg']
+    )
 FeatureSet = namedtuple(
     "FeatureSet",
     [
@@ -12,8 +23,7 @@ FeatureSet = namedtuple(
     'TSP','eFGP','TPAr',
     'FTr','ORBP','DRBP','TRBP','ASTP','STLP',
     'BLKP','TOVP','USGP','ORtg','DRtg'
-        ] )
-        # l40 items
+        ])
 
 # test = {'away_basic': ['sac', '240', '52', '101', '.515', '6', '22', '.273', '22', '30', '.733', '16', '40', '56', '26', '6', '7', '14', '23', '132'], 'home': 'lal', 
 # 'home_advanced': ['lal', '240', '.565', '.522', '.382', '.303', '16.7', '64.4', '39.8', '48.8', '6.4', '11.4', '15.8', '100.0', '104.3', '120.8'], 
@@ -23,8 +33,10 @@ FeatureSet = namedtuple(
 
 def calculate_featues_from_boxscore(boxscore,home=False):
     team = 'home' if home else 'away'
+
     basic = boxscore[team+'_basic']
     advanced = boxscore[team+'_advanced']
     stats = basic[1:4]+basic[5:7]+basic[8:10]+basic[11:]+advanced[2:]
     return FeatureSet( *[float(x) for x in stats])
+
 

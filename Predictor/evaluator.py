@@ -32,6 +32,7 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
       overunder_by_game_tuple[game_tuple] = game['overunder']
 
   winnings_list = []
+  preds = []
   for _ in range(cv_runs):
     win = 0
     loss = 0
@@ -41,9 +42,10 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
       prediction = prediction_by_game_tuple[game_tuple][0]
       actual_score = historical_games_by_tuple[game_tuple]
       overunder = float(overunder_by_game_tuple[game_tuple])
+      preds.append(abs(prediction - overunder))
       if numpy.random.uniform(0,1) > cv_percent:
         continue
-      if abs(prediction - overunder) < bet_threshold:
+      if abs(prediction - overunder) < bet_threshold: # bet threshold  sets how confident we want our prediction to be
         continue
       if prediction < overunder and actual_score < overunder:
         win += 1
@@ -64,4 +66,5 @@ def evaluate_model(the_model, all_stats, bet_info, historical_games_by_tuple, mo
       winnings_avg,
       winnings_std,
       ))
+  print("Record = {0}-{1}".format(win,loss))
   return winnings_avg, winnings_std

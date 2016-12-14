@@ -1,0 +1,16 @@
+setup.py
+BoxScores/__init__.py
+BoxScores/items.py
+BoxScores/pipelines.py
+BoxScores/settings.py
+BoxScores/spiders/GetBox.py
+BoxScores/spiders/__init__.py
+BoxScores/spiders/bbrefBox.py
+BoxScores/spiders/betLines.py
+BoxScores/spiders/parsePlayByPlay.py
+BoxScores/spiders/shotChart.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
