@@ -1,6 +1,4 @@
-from game_stats import GameStats,GameStats2
-
-
+from game_stats import GameStats
 class TeamStats(object):
     """ Class to store info about a team"""
     def __init__(self,name):

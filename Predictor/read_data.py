@@ -32,13 +32,13 @@ def generate_historical_games(box_scores,max_date = None):
     return historical_games
 
     
-def generate_all_stats(box_scores,all_stats = None):
+def generate_all_stats(box_scores,all_stats = None,teamnames = teamNames):
     '''
     Organize stats with TeamStats class for each team
     
     '''
     if not all_stats:
-        all_stats = {x:TeamStats(x) for x in teamNames}
+        all_stats = {x:TeamStats(x) for x in teamnames}
     for game in box_scores:
         box_score = box_scores[game]
         home = box_score['home'].upper()
@@ -50,7 +50,6 @@ def generate_all_stats(box_scores,all_stats = None):
         all_stats[team].stats['away'].orderStats()
         all_stats[team].stats['total'].orderStats()
 
-        
     return all_stats
     
 
